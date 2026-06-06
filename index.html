@@ -38,10 +38,10 @@
         /* ----- HEADER — ANIMATED GLASSMORPHISM ----- */
         .site-header {
             position: fixed; top: 0; left: 0; width: 100%;
-            background: transparent;
-            backdrop-filter: none; -webkit-backdrop-filter: none;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
             z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.18);
             padding: 10px 20px;
             transform: translateY(-100%);
             animation: headerSlideDown 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
@@ -52,11 +52,11 @@
             content: ''; position: absolute; top: 0; left: -50%; width: 200%; height: 1px;
             background: linear-gradient(90deg,
                 transparent 0%,
-                rgba(68,166,182,0) 10%,
-                rgba(68,166,182,0.1) 30%,
-                rgba(68,166,182,0.3) 50%,
-                rgba(68,166,182,0.1) 70%,
-                rgba(68,166,182,0) 90%,
+                rgba(48,63,149,0) 10%,
+                rgba(48,63,149,0.15) 30%,
+                rgba(22,211,170,0.2) 50%,
+                rgba(48,63,149,0.15) 70%,
+                rgba(48,63,149,0) 90%,
                 transparent 100%
             );
             animation: headerShimmer 4s ease-in-out infinite;
@@ -69,7 +69,7 @@
         /* Subtle glass pulse on the background */
         .site-header::after {
             content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(ellipse 60% 100% at 50% 0%, rgba(68,166,182,0.04) 0%, transparent 70%);
+            background: radial-gradient(ellipse 60% 100% at 50% 0%, rgba(48,63,149,0.02) 0%, transparent 70%);
             animation: glassPulse 6s ease-in-out infinite;
             pointer-events: none;
             z-index: -1;
@@ -95,8 +95,8 @@
         .site-logo { height: 50px; position: relative; }
         .site-logo img {
             height: 50px; width: auto;
-            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), filter 0.4s ease;
-            filter: brightness(0) invert(1);
+            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            filter: none;
         }
         .site-logo:hover img { transform: scale(1.04); }
 
@@ -104,7 +104,7 @@
         .main-nav { display: flex; gap: 28px; align-items: center; }
         .main-nav a {
             font-family: 'Montserrat', sans-serif;
-            font-size: 14px; font-weight: 600; color: rgba(255, 255, 255, 0.75);
+            font-size: 14px; font-weight: 600; color: #303F95;
             text-transform: uppercase; letter-spacing: 0.5px;
             position: relative;
             transition: color 0.3s ease;
@@ -123,20 +123,15 @@
         .main-nav a::after {
             content: ''; position: absolute; left: 0; bottom: -4px;
             width: 0; height: 2px;
-            background: linear-gradient(90deg, #44A6B6, #1C53B5);
+            background: linear-gradient(90deg, #303F95, #16D3AA);
             border-radius: 2px;
             transition: width 0.35s cubic-bezier(0.23, 1, 0.32, 1);
         }
-        .main-nav a:hover { color: #FFFFFF; }
+        .main-nav a:hover { color: #0015A3; }
         .main-nav a:hover::after { width: 100%; }
         .main-nav a.nav-cta::after { display: none; }
 
-        /* Scrolled states for links, logo, toggle */
-        .site-header.scrolled .main-nav a { color: #303F95; }
-        .site-header.scrolled .main-nav a:hover { color: #0015A3; }
-        .site-header.scrolled .main-nav a::after { background: linear-gradient(90deg, #303F95, #16D3AA); }
-        .site-header.scrolled .site-logo img { filter: none; }
-        .site-header.scrolled .mobile-toggle { color: #303F95; }
+        .mobile-toggle { display: none; font-size: 24px; cursor: pointer; color: #303F95; transition: color 0.4s; }
 
         /* CTA button — gentle glow pulse cycle */
         .nav-cta {
@@ -156,34 +151,33 @@
             box-shadow: 0 6px 24px rgba(28,83,181,0.45) !important;
             animation: none !important;
         }
-        .mobile-toggle { display: none; font-size: 24px; cursor: pointer; color: rgba(255, 255, 255, 0.85); transition: color 0.4s; }
 
-        /* ----- HERO — DARK GLIMPSE THEME WITH 3D ----- */
+        /* ----- HERO — PREMIUM LIGHT GLASSMORPHISM THEME ----- */
         .hero {
             position: relative; width: 100%; height: 100vh; min-height: 620px;
             overflow: hidden; margin-top: 70px;
-            background: #030406;
+            background: #FFFFFF;
             display: flex; align-items: center;
             perspective: 800px;
             perspective-origin: 50% 30%;
         }
-        /* Glimpse grid & radial ambient glow combined */
+        /* Blueprint grid & soft ambient color gradients combined */
         .hero-bg {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: #030406;
+            background-color: #FFFFFF;
             background-image:
-                linear-gradient(rgba(255, 255, 255, 0.012) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.012) 1px, transparent 1px),
-                radial-gradient(ellipse 75% 60% at 0% 10%, rgba(28, 83, 181, 0.15) 0%, transparent 70%),
-                radial-gradient(ellipse 65% 50% at 100% 90%, rgba(196, 67, 19, 0.1) 0%, transparent 60%),
-                radial-gradient(ellipse 50% 40% at 50% 50%, rgba(68, 166, 182, 0.12) 0%, transparent 65%);
+                linear-gradient(rgba(48, 63, 149, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(48, 63, 149, 0.03) 1px, transparent 1px),
+                radial-gradient(ellipse 75% 60% at 0% 10%, rgba(48, 63, 149, 0.08) 0%, transparent 70%),
+                radial-gradient(ellipse 65% 50% at 100% 90%, rgba(196, 67, 19, 0.05) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 40% at 50% 50%, rgba(22, 211, 170, 0.08) 0%, transparent 65%);
             background-size: 44px 44px, 44px 44px, auto, auto, auto;
             background-position: center top;
         }
-        /* Floating light orbs */
+        /* Floating light orbs (softer opacity for light theme) */
         .hero-orb {
             position: absolute; border-radius: 50%; pointer-events: none; z-index: 1;
-            filter: blur(120px); opacity: 0.32;
+            filter: blur(120px); opacity: 0.12;
         }
         .hero-orb-1 {
             width: 500px; height: 500px; top: -15%; left: -8%;
@@ -199,7 +193,7 @@
             width: 200px; height: 200px; top: 30%; right: 30%;
             background: #44A6B6;
             animation: orbDrift 16s ease-in-out infinite;
-            animation-delay: -6s; opacity: 0.2;
+            animation-delay: -6s; opacity: 0.08;
         }
         @keyframes orbDrift {
             0%, 100% { transform: translate(0, 0) scale(1); }
@@ -224,32 +218,32 @@
         }
         .hero-badge {
             display: inline-flex; align-items: center; gap: 8px;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(48, 63, 149, 0.06);
             backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(48, 63, 149, 0.12);
             padding: 8px 18px; border-radius: 50px;
-            font-size: 13px; color: rgba(255, 255, 255, 0.55);
+            font-size: 13px; color: #303F95;
             font-family: 'Montserrat', sans-serif;
-            font-weight: 500; letter-spacing: 0.3px;
+            font-weight: 600; letter-spacing: 0.3px;
             margin-bottom: 28px;
             animation: fadeUp 0.8s 0.1s both;
         }
-        .hero-badge i { color: #44A6B6; font-size: 10px; }
+        .hero-badge i { color: #16D3AA; font-size: 10px; }
         .hero-title {
             font-family: 'Montserrat', sans-serif;
-            font-size: 52px; font-weight: 700; color: #FFFFFF;
+            font-size: 52px; font-weight: 700; color: #0B0F1C;
             line-height: 1.15; letter-spacing: -0.5px;
             margin-bottom: 20px;
             animation: fadeUp 0.8s 0.25s both;
         }
         .hero-title .highlight {
-            background: linear-gradient(135deg, #44A6B6, #1C53B5, #C44313);
+            background: linear-gradient(135deg, #303F95, #1C53B5, #16D3AA);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
         .hero-sub {
-            font-size: 17px; color: rgba(255, 255, 255, 0.55);
+            font-size: 17px; color: #555555;
             line-height: 1.7; margin-bottom: 36px; max-width: 480px;
             font-family: 'Roboto', sans-serif;
             animation: fadeUp 0.8s 0.4s both;
@@ -259,25 +253,25 @@
             animation: fadeUp 0.8s 0.55s both;
         }
         .hero-btn-primary {
-            background: linear-gradient(135deg, #1C53B5, #44A6B6); color: #FFFFFF; border: none;
+            background: linear-gradient(135deg, #303F95, #1C53B5); color: #FFFFFF; border: none;
             padding: 14px 32px; border-radius: 50px; font-size: 15px;
             font-weight: 700; cursor: pointer;
             transition: all 0.3s; font-family: 'Montserrat', sans-serif;
-            box-shadow: 0 4px 16px rgba(28, 83, 181, 0.3);
+            box-shadow: 0 4px 16px rgba(48, 63, 149, 0.2);
         }
         .hero-btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 12px 30px rgba(28, 83, 181, 0.45);
+            box-shadow: 0 12px 30px rgba(48, 63, 149, 0.35);
         }
         .hero-btn-secondary {
-            background: transparent; color: #FFFFFF; border: 1px solid rgba(255, 255, 255, 0.15);
+            background: transparent; color: #303F95; border: 1px solid rgba(48, 63, 149, 0.25);
             padding: 14px 32px; border-radius: 50px; font-size: 15px;
             font-weight: 600; cursor: pointer;
             transition: all 0.3s; font-family: 'Montserrat', sans-serif;
         }
         .hero-btn-secondary:hover {
-            border-color: rgba(255, 255, 255, 0.35);
-            background: rgba(255, 255, 255, 0.05);
+            border-color: #303F95;
+            background: rgba(48, 63, 149, 0.05);
         }
 
         @keyframes fadeUp {
@@ -294,104 +288,130 @@
         }
         .hero-glass-card {
             width: 100%; max-width: 420px;
-            background: rgba(10, 15, 30, 0.45);
+            background: rgba(255, 255, 255, 0.45);
             backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.7);
             border-radius: 20px; padding: 32px 28px;
-            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            box-shadow: 0 30px 70px rgba(48, 63, 149, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s ease;
             transform: translateZ(90px); /* Deeper 3D Depth Layer */
             transform-style: preserve-3d;
             position: relative;
         }
-        .hero-glass-card:hover { transform: translateY(-6px) translateZ(110px); }
         
-        /* 3D spinning glass cube */
-        .cube-3d-wrap {
-            position: absolute; top: -42px; right: -36px;
-            width: 76px; height: 76px;
-            perspective: 300px;
-            pointer-events: none;
-            z-index: 10;
-        }
-        .cube-3d {
-            width: 100%; height: 100%;
+        /* Reactive video container styles */
+        .hero-video-wrap {
+            margin: 0px 0px 24px;
+            width: 100%;
+            height: 190px;
+            border-radius: 12px;
+            overflow: hidden;
             position: relative;
+            background: #000000;
+            border: 1px solid rgba(48, 63, 149, 0.15);
+            box-shadow: 0 8px 32px rgba(48, 63, 149, 0.08);
             transform-style: preserve-3d;
-            animation: spinCube 12s linear infinite;
+            transform: translateZ(20px);
         }
-        @keyframes spinCube {
-            0% { transform: rotateX(15deg) rotateY(0deg) rotateZ(0deg); }
-            100% { transform: rotateX(375deg) rotateY(360deg) rotateZ(180deg); }
+        .hero-video-wrap video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            filter: contrast(1.05) saturate(1.1) brightness(0.95);
+            transition: filter 0.4s ease, transform 0.4s ease;
         }
-        .cube-face {
+        .hero-video-wrap:hover video {
+            filter: contrast(1.15) saturate(1.35) brightness(1.05);
+            transform: scale(1.03);
+        }
+        .video-glow-overlay {
             position: absolute;
-            width: 52px; height: 52px;
-            background: rgba(68, 166, 182, 0.07);
-            border: 1.5px solid rgba(68, 166, 182, 0.5);
-            backdrop-filter: blur(1px);
-            box-shadow: 0 0 10px rgba(68, 166, 182, 0.15), inset 0 0 6px rgba(68, 166, 182, 0.15);
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(0deg, rgba(48, 63, 149, 0.15) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 2;
         }
-        .cube-face.front  { transform: rotateY(0deg) translateZ(26px); }
-        .cube-face.back   { transform: rotateY(180deg) translateZ(26px); border-color: rgba(28, 83, 181, 0.35); }
-        .cube-face.left   { transform: rotateY(-90deg) translateZ(26px); }
-        .cube-face.right  { transform: rotateY(90deg) translateZ(26px); }
-        .cube-face.top    { transform: rotateX(90deg) translateZ(26px); }
-        .cube-face.bottom { transform: rotateX(-90deg) translateZ(26px); border-color: rgba(28, 83, 181, 0.35); }
+        .video-badge {
+            position: absolute;
+            top: 12px; right: 12px;
+            background: rgba(22, 211, 170, 0.85);
+            color: #FFFFFF;
+            font-size: 11px; font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            backdrop-filter: blur(4px);
+            z-index: 3;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .video-badge i {
+            font-size: 8px;
+            animation: pulsePlay 1.5s infinite;
+        }
+        @keyframes pulsePlay {
+            0%, 100% { opacity: 0.5; transform: scale(0.9); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
 
         .glass-card-header {
             display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 24px; padding-bottom: 18px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            margin-bottom: 20px; padding-bottom: 16px;
+            border-bottom: 1px solid rgba(48, 63, 149, 0.1);
         }
         .glass-card-header h4 {
-            color: #FFFFFF; font-size: 16px; font-weight: 600;
+            color: #0B0F1C; font-size: 16px; font-weight: 600;
             font-family: 'Montserrat', sans-serif;
         }
         .glass-card-header span {
             color: #C44313; font-size: 13px; font-weight: 600;
-            background: rgba(196, 67, 19, 0.12); padding: 4px 12px;
+            background: rgba(196, 67, 19, 0.1); padding: 4px 12px;
             border-radius: 20px;
         }
         .glass-stat { margin-bottom: 20px; }
         .glass-stat-label {
-            font-size: 12px; color: rgba(255, 255, 255, 0.45);
+            font-size: 12px; color: #555555;
             text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;
         }
         .glass-stat-value {
-            font-size: 28px; font-weight: 700; color: #FFFFFF;
+            font-size: 28px; font-weight: 700; color: #303F95;
             font-family: 'Montserrat', sans-serif;
         }
-        .glass-stat-value small { font-size: 14px; font-weight: 400; color: rgba(255, 255, 255, 0.45); margin-left: 4px; }
+        .glass-stat-value small { font-size: 14px; font-weight: 400; color: #555555; margin-left: 4px; }
         .glass-progress {
-            height: 4px; border-radius: 4px; background: rgba(255, 255, 255, 0.05);
+            height: 4px; border-radius: 4px; background: rgba(48, 63, 149, 0.08);
             margin: 12px 0 8px; overflow: hidden;
         }
         .glass-progress-bar {
             height: 100%; border-radius: 4px;
-            background: linear-gradient(90deg, #1C53B5, #44A6B6);
+            background: linear-gradient(90deg, #303F95, #16D3AA);
             width: 72%;
         }
         .glass-progress-label {
             display: flex; justify-content: space-between;
-            font-size: 11px; color: rgba(255, 255, 255, 0.35);
+            font-size: 11px; color: #666666;
         }
 
-        /* Slide dots — thin line dark style */
+        /* Slide dots — thin line light style */
         .hero-nav {
             position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
             z-index: 20; display: flex; gap: 8px; align-items: center;
         }
         .hero-dot {
             width: 32px; height: 3px; border-radius: 2px; border: none;
-            background: rgba(255, 255, 255, 0.2); cursor: pointer;
+            background: rgba(48, 63, 149, 0.2); cursor: pointer;
             transition: all 0.4s; padding: 0;
         }
         .hero-dot.active {
             width: 52px;
-            background: linear-gradient(90deg, #44A6B6, #1C53B5);
+            background: linear-gradient(90deg, #303F95, #16D3AA);
         }
-        .hero-dot:hover { background: rgba(255, 255, 255, 0.35); }
+        .hero-dot:hover { background: rgba(48, 63, 149, 0.35); }
 
         /* ----- SECTION HEADINGS (shared modern style) ----- */
         .section-heading {
@@ -732,22 +752,14 @@
             .main-nav.open {
                 display: flex; flex-direction: column; gap: 16px;
                 position: absolute; top: 100%; left: 0; width: 100%;
-                background: rgba(10, 15, 30, 0.85);
+                background: rgba(255, 255, 255, 0.6);
                 backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px);
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.6);
                 padding: 20px 24px;
-                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            }
-            .site-header.scrolled .main-nav.open {
-                background: rgba(255, 255, 255, 0.75);
-                border-bottom-color: rgba(255, 255, 255, 0.3);
                 box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
             }
             .main-nav.open a {
                 opacity: 1; transform: none; animation: none;
-                color: rgba(255, 255, 255, 0.8) !important;
-            }
-            .site-header.scrolled .main-nav.open a {
                 color: #303F95 !important;
             }
             .industries-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
@@ -838,20 +850,19 @@
 
             <div class="hero-visual">
                 <div class="hero-glass-card" id="heroGlassCard">
-                    <!-- 3D Spinning Glass Cube -->
-                    <div class="cube-3d-wrap">
-                        <div class="cube-3d">
-                            <div class="cube-face front"></div>
-                            <div class="cube-face back"></div>
-                            <div class="cube-face left"></div>
-                            <div class="cube-face right"></div>
-                            <div class="cube-face top"></div>
-                            <div class="cube-face bottom"></div>
-                        </div>
-                    </div>
                     <div class="glass-card-header">
                         <h4>Consulting Impact</h4>
                         <span><i class="fas fa-arrow-up"></i> +34%</span>
+                    </div>
+                    <!-- Reactive Business Growth Video -->
+                    <div class="hero-video-wrap">
+                        <div class="video-glow-overlay"></div>
+                        <div class="video-badge">
+                            <i class="fas fa-circle"></i> Live Growth
+                        </div>
+                        <video autoplay loop muted playsinline id="growthVideo">
+                            <source src="https://assets.mixkit.co/videos/preview/mixkit-business-charts-on-a-tablet-screen-40266-large.mp4" type="video/mp4">
+                        </video>
                     </div>
                     <div class="glass-stat">
                         <div class="glass-stat-label">Efficiency Improvement</div>
@@ -868,7 +879,7 @@
                         <div class="glass-stat-label">Cost Savings Realized</div>
                         <div class="glass-stat-value">$2.4M<small>+</small></div>
                         <div class="glass-progress">
-                            <div class="glass-progress-bar" style="width:64%;background:linear-gradient(90deg,#16D3AA,#FFFFFF);"></div>
+                            <div class="glass-progress-bar" style="width:64%;background:linear-gradient(90deg,#16D3AA,#303F95);"></div>
                         </div>
                         <div class="glass-progress-label">
                             <span>YTD across clients</span>
@@ -1322,6 +1333,41 @@
             aboutCard.addEventListener('mouseleave', function() {
                 aboutCard.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
                 aboutCard.style.boxShadow = '0 15px 35px rgba(0, 0, 0, 0.08)';
+            });
+        }
+
+        // ----- HERO GLASS CARD 3D TILT & VIDEO SPEED CONTROLLER -----
+        const heroGlassCard = document.getElementById('heroGlassCard');
+        const growthVideo = document.getElementById('growthVideo');
+        if (heroGlassCard) {
+            heroGlassCard.addEventListener('mousemove', function(e) {
+                const rect = heroGlassCard.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const xc = ((x / rect.width) - 0.5);
+                const yc = -((y / rect.height) - 0.5);
+                
+                // Tilt up to 15 degrees
+                const rotateX = yc * 15;
+                const rotateY = xc * 15;
+                
+                heroGlassCard.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03) translateZ(100px)`;
+                heroGlassCard.style.boxShadow = `${-xc * 30}px ${-yc * 30}px 50px rgba(48, 63, 149, 0.12), 0 20px 40px rgba(0, 0, 0, 0.05)`;
+            });
+            
+            heroGlassCard.addEventListener('mouseleave', function() {
+                heroGlassCard.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1) translateZ(90px)';
+                heroGlassCard.style.boxShadow = '0 30px 70px rgba(48, 63, 149, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9)';
+                if (growthVideo) {
+                    growthVideo.playbackRate = 1.0;
+                }
+            });
+
+            heroGlassCard.addEventListener('mouseenter', function() {
+                if (growthVideo) {
+                    growthVideo.playbackRate = 1.75; // speeds up on hover!
+                }
             });
         }
     </script>
