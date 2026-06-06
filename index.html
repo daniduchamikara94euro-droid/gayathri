@@ -287,77 +287,115 @@
             transform-style: preserve-3d;
         }
         .hero-glass-card {
-            width: 100%; max-width: 450px;
+            width: 100%; max-width: 420px;
             background: rgba(255, 255, 255, 0.45);
             backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px);
             border: 1px solid rgba(255, 255, 255, 0.7);
-            border-radius: 20px; padding: 12px;
+            border-radius: 20px; padding: 32px 28px;
             box-shadow: 0 30px 70px rgba(48, 63, 149, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9);
             transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s ease;
             transform: translateZ(90px); /* Deeper 3D Depth Layer */
             transform-style: preserve-3d;
             position: relative;
-            aspect-ratio: 1.4;
         }
         
-        /* Reactive video container styles */
-        .hero-video-wrap {
-            margin: 0;
+        /* 3D Growing Business Chart Container */
+        .chart-3d-container {
             width: 100%;
-            height: 100%;
-            border-radius: 12px;
-            overflow: hidden;
-            position: relative;
-            background: #000000;
-            border: 1px solid rgba(48, 63, 149, 0.15);
-            box-shadow: 0 8px 32px rgba(48, 63, 149, 0.08);
-            transform-style: preserve-3d;
-            transform: translateZ(20px);
-        }
-        .hero-video-wrap video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            filter: contrast(1.05) saturate(1.1) brightness(0.95);
-            transition: filter 0.4s ease, transform 0.4s ease;
-        }
-        .hero-video-wrap:hover video {
-            filter: contrast(1.15) saturate(1.35) brightness(1.05);
-            transform: scale(1.03);
-        }
-        .video-glow-overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(0deg, rgba(48, 63, 149, 0.15) 0%, transparent 60%);
-            pointer-events: none;
-            z-index: 2;
-        }
-        .video-badge {
-            position: absolute;
-            top: 12px; right: 12px;
-            background: rgba(22, 211, 170, 0.85);
-            color: #FFFFFF;
-            font-size: 11px; font-weight: 700;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-family: 'Montserrat', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            backdrop-filter: blur(4px);
-            z-index: 3;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            height: 180px;
+            margin: 10px 0 28px;
             display: flex;
-            align-items: center;
-            gap: 6px;
+            align-items: flex-end;
+            justify-content: center;
+            perspective: 600px;
+            perspective-origin: 50% 30%;
+            transform-style: preserve-3d;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(48, 63, 149, 0.1);
         }
-        .video-badge i {
-            font-size: 8px;
-            animation: pulsePlay 1.5s infinite;
+        .chart-3d {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 48px;
+            transform-style: preserve-3d;
+            transform: rotateX(-16deg) rotateY(20deg);
         }
-        @keyframes pulsePlay {
-            0%, 100% { opacity: 0.5; transform: scale(0.9); }
-            50% { opacity: 1; transform: scale(1.1); }
+        .bar-3d {
+            position: relative;
+            width: 32px;
+            transform-style: preserve-3d;
+            transform-origin: bottom;
+        }
+        .bar-3d-1 {
+            height: 70px;
+            --bar-color: rgba(22, 211, 170, 0.4);
+            --bar-color-top: rgba(22, 211, 170, 0.85);
+            --bar-border: rgba(22, 211, 170, 0.65);
+            animation: growBar1 4s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+        }
+        .bar-3d-2 {
+            height: 105px;
+            --bar-color: rgba(48, 63, 149, 0.4);
+            --bar-color-top: rgba(48, 63, 149, 0.85);
+            --bar-border: rgba(48, 63, 149, 0.65);
+            animation: growBar2 4s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+            animation-delay: 0.4s;
+        }
+        .bar-3d-3 {
+            height: 140px;
+            --bar-color: rgba(196, 67, 19, 0.4);
+            --bar-color-top: rgba(196, 67, 19, 0.85);
+            --bar-border: rgba(196, 67, 19, 0.65);
+            animation: growBar3 4s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+            animation-delay: 0.8s;
+        }
+
+        .bar-face {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 32px;
+            height: 100%;
+            background: var(--bar-color);
+            border: 1px solid var(--bar-border);
+            box-sizing: border-box;
+            box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+        .bar-face.front {
+            transform: translate3d(0, 0, 16px);
+        }
+        .bar-face.back {
+            transform: translate3d(0, 0, -16px) rotateY(180deg);
+        }
+        .bar-face.left {
+            transform: translate3d(-16px, 0, 0) rotateY(-90deg);
+        }
+        .bar-face.right {
+            transform: translate3d(16px, 0, 0) rotateY(90deg);
+        }
+        .bar-face.top {
+            width: 32px;
+            height: 32px;
+            top: 0;
+            background: var(--bar-color-top);
+            transform: translate3d(0, -16px, 0) rotateX(90deg);
+            box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        @keyframes growBar1 {
+            0% { transform: scaleY(0.25); }
+            100% { transform: scaleY(1); }
+        }
+        @keyframes growBar2 {
+            0% { transform: scaleY(0.2); }
+            100% { transform: scaleY(1.05); }
+        }
+        @keyframes growBar3 {
+            0% { transform: scaleY(0.15); }
+            100% { transform: scaleY(1.1); }
         }
 
         .glass-card-header {
@@ -745,7 +783,7 @@
             .about-image-card { min-height: unset; }
             .contact-inner { flex-direction: column; }
             .hero-title { font-size: 36px; }
-            .hero-glass-card { max-width: 360px; padding: 12px; }
+            .hero-glass-card { max-width: 360px; padding: 24px 20px; }
         }
         @media (max-width: 768px) {
             .main-nav { display: none; }
@@ -788,7 +826,7 @@
             .hero-sub { font-size: 15px; }
             .hero-actions { flex-direction: column; align-items: stretch; }
             .hero-btn-primary, .hero-btn-secondary { text-align: center; }
-            .hero-glass-card { padding: 10px; }
+            .hero-glass-card { padding: 20px 16px; }
             .glass-stat-value { font-size: 22px; }
             .hero-orb-2 { display: none; }
             .hero-orb-3 { display: none; }
@@ -851,15 +889,59 @@
 
             <div class="hero-visual">
                 <div class="hero-glass-card" id="heroGlassCard">
-                    <!-- Reactive Business Growth Video -->
-                    <div class="hero-video-wrap">
-                        <div class="video-glow-overlay"></div>
-                        <div class="video-badge">
-                            <i class="fas fa-circle"></i> Live Growth
+                    <div class="glass-card-header">
+                        <h4>Consulting Impact</h4>
+                        <span><i class="fas fa-arrow-up"></i> +34%</span>
+                    </div>
+                    
+                    <!-- 3D Growing Business Chart -->
+                    <div class="chart-3d-container">
+                        <div class="chart-3d">
+                            <div class="bar-3d bar-3d-1">
+                                <div class="bar-face front"></div>
+                                <div class="bar-face back"></div>
+                                <div class="bar-face left"></div>
+                                <div class="bar-face right"></div>
+                                <div class="bar-face top"></div>
+                            </div>
+                            <div class="bar-3d bar-3d-2">
+                                <div class="bar-face front"></div>
+                                <div class="bar-face back"></div>
+                                <div class="bar-face left"></div>
+                                <div class="bar-face right"></div>
+                                <div class="bar-face top"></div>
+                            </div>
+                            <div class="bar-3d bar-3d-3">
+                                <div class="bar-face front"></div>
+                                <div class="bar-face back"></div>
+                                <div class="bar-face left"></div>
+                                <div class="bar-face right"></div>
+                                <div class="bar-face top"></div>
+                            </div>
                         </div>
-                        <video autoplay loop muted playsinline id="growthVideo">
-                            <source src="https://assets.mixkit.co/videos/preview/mixkit-business-charts-on-a-tablet-screen-40266-large.mp4" type="video/mp4">
-                        </video>
+                    </div>
+
+                    <div class="glass-stat">
+                        <div class="glass-stat-label">Efficiency Improvement</div>
+                        <div class="glass-stat-value">87<small>%</small></div>
+                        <div class="glass-progress">
+                            <div class="glass-progress-bar" style="width:87%"></div>
+                        </div>
+                        <div class="glass-progress-label">
+                            <span>Target: 92%</span>
+                            <span>+12% vs last quarter</span>
+                        </div>
+                    </div>
+                    <div class="glass-stat">
+                        <div class="glass-stat-label">Cost Savings Realized</div>
+                        <div class="glass-stat-value">$2.4M<small>+</small></div>
+                        <div class="glass-progress">
+                            <div class="glass-progress-bar" style="width:64%;background:linear-gradient(90deg,#16D3AA,#303F95);"></div>
+                        </div>
+                        <div class="glass-progress-label">
+                            <span>YTD across clients</span>
+                            <span>14 projects</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1311,9 +1393,8 @@
             });
         }
 
-        // ----- HERO GLASS CARD 3D TILT & VIDEO SPEED CONTROLLER -----
+        // ----- HERO GLASS CARD 3D TILT EFFECT -----
         const heroGlassCard = document.getElementById('heroGlassCard');
-        const growthVideo = document.getElementById('growthVideo');
         if (heroGlassCard) {
             heroGlassCard.addEventListener('mousemove', function(e) {
                 const rect = heroGlassCard.getBoundingClientRect();
@@ -1334,15 +1415,6 @@
             heroGlassCard.addEventListener('mouseleave', function() {
                 heroGlassCard.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1) translateZ(90px)';
                 heroGlassCard.style.boxShadow = '0 30px 70px rgba(48, 63, 149, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9)';
-                if (growthVideo) {
-                    growthVideo.playbackRate = 1.0;
-                }
-            });
-
-            heroGlassCard.addEventListener('mouseenter', function() {
-                if (growthVideo) {
-                    growthVideo.playbackRate = 1.75; // speeds up on hover!
-                }
             });
         }
     </script>
