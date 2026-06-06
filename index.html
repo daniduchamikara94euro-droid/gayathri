@@ -156,6 +156,8 @@
             overflow: hidden; margin-top: 70px;
             background: #FFFFFF;
             display: flex; align-items: center;
+            perspective: 1200px;
+            perspective-origin: 50% 30%;
         }
         /* Subtle ambient glow */
         .hero-bg {
@@ -197,6 +199,9 @@
             display: flex; align-items: center; gap: 60px;
             max-width: 1200px; margin: 0 auto; padding: 0 40px;
             width: 100%;
+            transform-style: preserve-3d;
+            will-change: transform, opacity;
+            transition: transform 0.05s linear, opacity 0.05s linear;
         }
 
         .hero-text { flex: 1; max-width: 580px; }
@@ -1088,13 +1093,37 @@
             document.getElementById('mainNav').classList.toggle('open');
         }
 
-        // ----- HEADER SCROLL EFFECT -----
+        // ----- HEADER & HERO 3D SCROLL EFFECT -----
         const header = document.querySelector('.site-header');
+        const heroInner = document.querySelector('.hero-inner');
+        const heroEl = document.getElementById('hero');
+
         window.addEventListener('scroll', function() {
-            if (window.scrollY > 40) {
+            const scrollY = window.scrollY;
+
+            // Header state
+            if (scrollY > 40) {
                 header.classList.add('scrolled');
             } else {
                 header.classList.remove('scrolled');
+            }
+
+            // Hero 3D scroll effect
+            if (heroEl && heroInner) {
+                const heroHeight = heroEl.offsetHeight || window.innerHeight;
+                if (scrollY <= heroHeight) {
+                    const progress = scrollY / heroHeight;
+                    const scale = 1 - (progress * 0.1);         // Scales down to 0.9
+                    const rotateX = progress * 10;              // Tilts back 10 degrees
+                    const translateY = progress * -30;          // Slides up slightly
+                    const opacity = 1 - (progress * 1.3);       // Fades out
+
+                    heroInner.style.transform = `rotateX(${rotateX}deg) scale(${scale}) translateY(${translateY}px)`;
+                    heroInner.style.opacity = Math.max(opacity, 0);
+                } else {
+                    heroInner.style.transform = 'none';
+                    heroInner.style.opacity = '0';
+                }
             }
         });
 
