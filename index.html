@@ -156,7 +156,7 @@
             overflow: hidden; margin-top: 70px;
             background: #FFFFFF;
             display: flex; align-items: center;
-            perspective: 1200px;
+            perspective: 800px; /* Stronger perspective for dramatic 3D */
             perspective-origin: 50% 30%;
         }
         /* Subtle ambient glow */
@@ -204,7 +204,11 @@
             transition: transform 0.05s linear, opacity 0.05s linear;
         }
 
-        .hero-text { flex: 1; max-width: 580px; }
+        .hero-text {
+            flex: 1; max-width: 580px;
+            transform-style: preserve-3d;
+            transform: translateZ(40px); /* 3D Depth Layer */
+        }
         .hero-badge {
             display: inline-flex; align-items: center; gap: 8px;
             background: rgba(48,63,149,0.06);
@@ -282,8 +286,9 @@
             border-radius: 20px; padding: 32px 28px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.04), 0 0 0 1px rgba(255,255,255,0.3), inset 0 1px 0 rgba(255,255,255,0.7);
             transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            transform: translateZ(90px); /* Deeper 3D Depth Layer */
         }
-        .hero-glass-card:hover { transform: translateY(-6px); }
+        .hero-glass-card:hover { transform: translateY(-6px) translateZ(110px); }
         .glass-card-header {
             display: flex; justify-content: space-between; align-items: center;
             margin-bottom: 24px; padding-bottom: 18px;
@@ -1113,12 +1118,13 @@
                 const heroHeight = heroEl.offsetHeight || window.innerHeight;
                 if (scrollY <= heroHeight) {
                     const progress = scrollY / heroHeight;
-                    const scale = 1 - (progress * 0.1);         // Scales down to 0.9
-                    const rotateX = progress * 10;              // Tilts back 10 degrees
-                    const translateY = progress * -30;          // Slides up slightly
-                    const opacity = 1 - (progress * 1.3);       // Fades out
+                    const scale = 1 - (progress * 0.18);        // Scales down to 0.82
+                    const rotateX = progress * 24;              // Tilts back dramatically (24 degrees)
+                    const translateY = progress * -80;          // Moves upward 80px
+                    const translateZ = progress * -250;         // Recedes back in 3D depth by 250px
+                    const opacity = 1 - (progress * 1.4);       // Fades out
 
-                    heroInner.style.transform = `rotateX(${rotateX}deg) scale(${scale}) translateY(${translateY}px)`;
+                    heroInner.style.transform = `rotateX(${rotateX}deg) scale(${scale}) translateY(${translateY}px) translateZ(${translateZ}px)`;
                     heroInner.style.opacity = Math.max(opacity, 0);
                 } else {
                     heroInner.style.transform = 'none';
